@@ -4,6 +4,7 @@ import com.clean.user_app.user.service.command.SignupCommand;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * description    : 로그인/회원가입 요청 DTO
@@ -16,7 +17,7 @@ import lombok.Setter;
  * -----------------------------------------------------------
  * 25. 6. 14.        김현주             최초 생성
  */
-@Getter @Setter
+@Getter @Setter @ToString
 public class SignupRequest {
     @NotBlank(message = "username은 반드시 입력해야 합니다.")
     private String username;

@@ -1,5 +1,6 @@
 package com.clean.user_app.user.controller;
 
+import com.clean.user_app.common.dto.CommonResponse;
 import com.clean.user_app.user.controller.request.SignupRequest;
 import com.clean.user_app.user.service.UserService;
 import jakarta.validation.Valid;
@@ -7,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 /**
  * description    : 로그인/회원가입 컨트롤러
@@ -27,22 +26,20 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-
     // 회원 가입
-    @PostMapping
-    public ResponseEntity<?> regUser(@RequestBody @Valid SignupRequest signupRequest) {
+    @PostMapping("/signup")
+    public ResponseEntity<CommonResponse<SignupRequest>> regUser(@RequestBody @Valid SignupRequest signupRequest) {
         userService.regUser(signupRequest.toCommand());
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "회원 가입 완료"));
+        final CommonResponse<SignupRequest> body = new CommonResponse<>("회원가입 성공", signupRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(body);
     }
 
     // 로그인
-    @PostMapping
-    public ResponseEntity<?> login(@RequestBody @Valid SignupRequest signupRequest) {
+    @PostMapping("/login")
+    public ResponseEntity<CommonResponse<String>> login(@RequestBody @Valid SignupRequest signupRequest) {
         final String loginUsername = userService.login(signupRequest.toCommand());
-        return ResponseEntity.ok(Map.of(
-                "message", "로그인에 성공했습니다.",
-                "username", loginUsername
-        ));
+        final CommonResponse<String> body = new CommonResponse<>("로그인 성공", loginUsername);
+        return ResponseEntity.ok().body(body);
     }
 
     @GetMapping("/test")
