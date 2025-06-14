@@ -1,10 +1,12 @@
 package com.clean.user_app.user.repository.userDaoImpl;
 
+import com.clean.user_app.entity.User;
 import com.clean.user_app.user.repository.UserDao;
 import com.clean.user_app.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.Optional;
 
 /**
  * description    : 유저 JDBC Template 서비스
@@ -30,5 +32,10 @@ public class UserJdbcTemplate implements UserDao {
 
         final int cnt = jdbcTemplate.update(sql, signupDto.getUsername(), signupDto.getPassword());
         log.info("[regUser] > [cnt] === {}", cnt);
+    }
+
+    @Override
+    public Optional<User> getUser(SignupDto signupDto) {
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.clean.user_app.user.controller.request;
 
 import com.clean.user_app.user.service.command.SignupCommand;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class SignupRequest {
+    @NotBlank(message = "username은 반드시 입력해야 합니다.")
     private String username;
     private String password;
 

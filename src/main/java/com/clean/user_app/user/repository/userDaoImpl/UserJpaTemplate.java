@@ -1,11 +1,13 @@
 package com.clean.user_app.user.repository.userDaoImpl;
 
+import com.clean.user_app.entity.User;
 import com.clean.user_app.user.repository.UserDao;
 import com.clean.user_app.user.repository.UserRepository;
 import com.clean.user_app.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import java.util.Optional;
 
 /**
  * description    : 유저 JPA 저장소 서비스
@@ -27,5 +29,11 @@ public class UserJpaTemplate implements UserDao {
     @Override
     public void regUser(SignupDto signupDto) {
         userRepository.save(signupDto.toEntity(signupDto));
+    }
+
+    @Override
+    public Optional<User> getUser(SignupDto signupDto) {
+        final Optional<User> optionalUser = userRepository.findByUsername(signupDto.getUsername());
+        return optionalUser;
     }
 }

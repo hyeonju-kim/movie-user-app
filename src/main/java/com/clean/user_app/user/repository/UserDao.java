@@ -1,6 +1,8 @@
 package com.clean.user_app.user.repository;
 
+import com.clean.user_app.entity.User;
 import com.clean.user_app.user.repository.dto.SignupDto;
+import java.util.Optional;
 
 /**
  * description    : 유저 DAO
@@ -16,4 +18,6 @@ import com.clean.user_app.user.repository.dto.SignupDto;
 
 public interface UserDao {
     void regUser(SignupDto signupDto);
+
+    Optional<User> getUser(SignupDto signupDto);
 }

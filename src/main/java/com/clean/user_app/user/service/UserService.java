@@ -16,5 +16,5 @@ import com.clean.user_app.user.service.command.SignupCommand;
 
 public interface UserService {
     void regUser(SignupCommand signupCommand);
-    void login(SignupCommand signupCommand);
+    String login(SignupCommand signupCommand);
 }
