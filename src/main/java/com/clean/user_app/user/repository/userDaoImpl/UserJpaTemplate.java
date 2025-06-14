@@ -28,12 +28,11 @@ public class UserJpaTemplate implements UserDao {
 
     @Override
     public void regUser(SignupDto signupDto) {
-        userRepository.save(signupDto.toEntity(signupDto));
+        userRepository.save(signupDto.toEntity());
     }
 
     @Override
     public Optional<User> getUser(SignupDto signupDto) {
-        final Optional<User> optionalUser = userRepository.findByUsername(signupDto.getUsername());
-        return optionalUser;
+        return userRepository.findByUsername(signupDto.getUsername());
     }
 }

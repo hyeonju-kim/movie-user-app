@@ -32,14 +32,15 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final HttpServletRequest request;
+    public static final String LOGIN_USER_KEY = "loginUser"; // 로그인 세션 키 상수
+
 
     // 회원 가입
     @Override
     public void regUser(SignupCommand signupCommand) {
-        log.info("[regUser] > [signupCommand.getUsername()] === {}", signupCommand.getUsername());
+        log.info("[regUser] > [signupCommand] === {}", signupCommand);
 
-        SignupDto signupDto = signupCommand.toDto(signupCommand);
-
+        SignupDto signupDto = signupCommand.toDto();
 
         // 비밀번호 암호화
         final String password = signupDto.getPassword();
@@ -48,35 +49,35 @@ public class UserServiceImpl implements UserService {
 
         // DB에 해당 유저가 없으면 등록
         Optional<User> foundUser = userDao.getUser(signupDto);
-        if (foundUser.isEmpty()) {
-            userDao.regUser(signupDto);
-        } else {
-            log.info("이미 가입한 회원입니다.");
+
+        if (foundUser.isPresent()) {
             throw new IllegalArgumentException("이미 가입한 회원입니다.");
         }
+        userDao.regUser(signupDto);
     }
 
     // 로그인
     @Override
     public String login(SignupCommand signupCommand) {
-        Optional<User> foundUser = userDao.getUser(signupCommand.toDto(signupCommand));
+        Optional<User> foundUser = userDao.getUser(signupCommand.toDto());
+        // 가입한 회원인지 확인
+        final User user = foundUser.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
+        // 암호 검증 후 세션에 회원 정보 저장
+        final boolean matches = bCryptPasswordEncoder.matches(signupCommand.getPassword(), user.getPassword());
+        if (matches) {
+            // 1. 기존 세션 있으면 삭제
+            HttpSession old = request.getSession(false);
+            if (old != null) old.invalidate();
 
-        if (foundUser.isPresent()) {
-            // 암호 검증
-            final String foundPassword = foundUser.get().getPassword();
-            final boolean matches = bCryptPasswordEncoder.matches(signupCommand.getPassword(), foundPassword);
-
-            // 검증 후 세션 저장
-            if (matches) {
-                final HttpSession session = request.getSession(true);
-                session.setAttribute("loginUser", foundUser.get());
-                log.info("[login] > [foundUser.get()] === {} 세션에 저장 완료!", foundUser.get());
-            }
+            // 2. 새 세션 생성 및 저장
+            final HttpSession session = request.getSession(true); // 기존 세션이 없으면 새로 만들기
+            session.setAttribute(LOGIN_USER_KEY, user);
+            log.info("[login] > [session] === {} 세션에 저장 완료 !", session);
         } else {
-            log.info("존재하지 않는 회원입니다.");
-            throw new IllegalArgumentException("존재하지 않는 회원입니다.");
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
-        return foundUser.get().getUsername();
+
+        return user.getUsername();
     }
 }

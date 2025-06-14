@@ -21,7 +21,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class LoginCheckInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        final HttpSession session = request.getSession(false);
+        final HttpSession session = request.getSession(false); // 기존 세션이 없으면 새로 만들지 않고 null 반환
         if (session == null || session.getAttribute("loginUser") == null) {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/plain;charset=UTF-8");

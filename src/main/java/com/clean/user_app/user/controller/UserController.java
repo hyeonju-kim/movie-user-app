@@ -4,6 +4,7 @@ import com.clean.user_app.user.controller.request.SignupRequest;
 import com.clean.user_app.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +31,14 @@ public class UserController {
     // 회원 가입
     @PostMapping
     public ResponseEntity<?> regUser(@RequestBody @Valid SignupRequest signupRequest) {
-        userService.regUser(signupRequest.toCommand(signupRequest));
-        return ResponseEntity.ok().build();
+        userService.regUser(signupRequest.toCommand());
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "회원 가입 완료"));
     }
 
     // 로그인
-    @GetMapping
+    @PostMapping
     public ResponseEntity<?> login(@RequestBody @Valid SignupRequest signupRequest) {
-        final String loginUsername = userService.login(signupRequest.toCommand(signupRequest));
+        final String loginUsername = userService.login(signupRequest.toCommand());
         return ResponseEntity.ok(Map.of(
                 "message", "로그인에 성공했습니다.",
                 "username", loginUsername

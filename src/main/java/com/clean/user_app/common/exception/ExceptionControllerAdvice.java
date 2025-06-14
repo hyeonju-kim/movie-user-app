@@ -42,6 +42,8 @@ public class ExceptionControllerAdvice {
     public ResponseEntity<?> handleOtherExceptions(Exception ex) {
         return ResponseEntity
                 .internalServerError()
-                .body(Map.of("message", "서버 내부 오류가 발생했습니다."));
-    }
+                .body(Map.of(
+                        "errorType", ex.getClass().getSimpleName(),
+                        "message", ex.getMessage()
+                ));    }
 }

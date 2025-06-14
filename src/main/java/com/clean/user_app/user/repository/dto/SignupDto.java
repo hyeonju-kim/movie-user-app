@@ -3,6 +3,7 @@ package com.clean.user_app.user.repository.dto;
 import com.clean.user_app.entity.User;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * description    : 로그인/회원가입 DTO
@@ -15,16 +16,16 @@ import lombok.Setter;
  * -----------------------------------------------------------
  * 25. 6. 14.        김현주             최초 생성
  */
-@Getter @Setter
+@Getter @Setter @ToString
 public class SignupDto {
     private String username;
     private String password;
 
     // SignupDto -> User
-    public User toEntity(SignupDto signupDto) {
+    public User toEntity() {
         final User user = new User();
-        user.setUsername(signupDto.getUsername());
-        user.setPassword(signupDto.getPassword());
+        user.setUsername(this.getUsername());
+        user.setPassword(this.getPassword());
         return user;
     }
 }

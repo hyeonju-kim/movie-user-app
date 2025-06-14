@@ -23,10 +23,10 @@ public class SignupRequest {
     private String password;
 
     // SignupRequest -> SignupCommand
-    public SignupCommand toCommand(SignupRequest signupRequest) {
+    public SignupCommand toCommand() {
         final SignupCommand signupCommand = new SignupCommand();
-        signupCommand.setUsername(signupRequest.getUsername());
-        signupCommand.setPassword(signupRequest.getPassword());
+        signupCommand.setUsername(this.getUsername());
+        signupCommand.setPassword(this.getPassword());
         return signupCommand;
     }
 }
