@@ -1,5 +1,6 @@
 package com.clean.user_app.user.service;
 
+import com.clean.user_app.user.service.command.LoginCommand;
 import com.clean.user_app.user.service.command.SignupCommand;
 
 /**
@@ -16,5 +17,5 @@ import com.clean.user_app.user.service.command.SignupCommand;
 
 public interface UserService {
     void regUser(SignupCommand signupCommand);
-    String login(SignupCommand signupCommand);
+    String login(LoginCommand loginCommand);
 }

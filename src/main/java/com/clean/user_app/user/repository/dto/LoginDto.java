@@ -6,22 +6,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * description    : 회원가입 DTO
+ * description    : 로그인 DTO
  * packageName    : com.clean.user_app.user.repository.dto
- * fileName       : SignupDto
+ * fileName       : LoginDto
  * author         : 김현주
- * date           : 25. 6. 14.
+ * date           : 25. 6. 15.
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 25. 6. 14.        김현주             최초 생성
+ * 25. 6. 15.        김현주             최초 생성
  */
 @Getter @Setter @ToString
-public class SignupDto {
+public class LoginDto {
     private String username;
     private String password;
 
-    // SignupDto -> User
+    // LoginDto -> User
     public User toEntity() {
         final User user = new User();
         user.setUsername(this.getUsername());

@@ -2,6 +2,7 @@ package com.clean.user_app.user.repository.userDaoImpl;
 
 import com.clean.user_app.entity.User;
 import com.clean.user_app.user.repository.UserDao;
+import com.clean.user_app.user.repository.dto.LoginDto;
 import com.clean.user_app.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,11 @@ public class UserJdbcTemplate implements UserDao {
 
         final int cnt = jdbcTemplate.update(sql, signupDto.getUsername(), signupDto.getPassword());
         log.info("[regUser] > [cnt] === {}", cnt);
+    }
+
+    @Override
+    public Optional<User> getUser(LoginDto loginDto) {
+        return Optional.empty();
     }
 
     @Override

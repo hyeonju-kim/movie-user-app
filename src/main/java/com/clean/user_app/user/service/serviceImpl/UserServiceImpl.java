@@ -4,6 +4,7 @@ import com.clean.user_app.entity.User;
 import com.clean.user_app.user.repository.UserDao;
 import com.clean.user_app.user.repository.dto.SignupDto;
 import com.clean.user_app.user.service.UserService;
+import com.clean.user_app.user.service.command.LoginCommand;
 import com.clean.user_app.user.service.command.SignupCommand;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -58,13 +59,13 @@ public class UserServiceImpl implements UserService {
 
     // 로그인
     @Override
-    public String login(SignupCommand signupCommand) {
-        Optional<User> foundUser = userDao.getUser(signupCommand.toDto());
+    public String login(LoginCommand loginCommand) {
+        Optional<User> foundUser = userDao.getUser(loginCommand.toDto());
         // 가입한 회원인지 확인
         final User user = foundUser.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
         // 암호 검증 후 세션에 회원 정보 저장
-        final boolean matches = bCryptPasswordEncoder.matches(signupCommand.getPassword(), user.getPassword());
+        final boolean matches = bCryptPasswordEncoder.matches(loginCommand.getPassword(), user.getPassword());
         if (matches) {
             // 1. 기존 세션 있으면 삭제
             HttpSession old = request.getSession(false);

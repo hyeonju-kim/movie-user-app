@@ -1,6 +1,7 @@
 package com.clean.user_app.user.controller;
 
 import com.clean.user_app.common.dto.CommonResponse;
+import com.clean.user_app.user.controller.request.LoginRequest;
 import com.clean.user_app.user.controller.request.SignupRequest;
 import com.clean.user_app.user.service.UserService;
 import jakarta.validation.Valid;
@@ -36,8 +37,8 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<CommonResponse<String>> login(@RequestBody @Valid SignupRequest signupRequest) {
-        final String loginUsername = userService.login(signupRequest.toCommand());
+    public ResponseEntity<CommonResponse<String>> login(@RequestBody @Valid LoginRequest loginRequest) {
+        final String loginUsername = userService.login(loginRequest.toCommand());
         final CommonResponse<String> body = new CommonResponse<>("로그인 성공", loginUsername);
         return ResponseEntity.ok().body(body);
     }

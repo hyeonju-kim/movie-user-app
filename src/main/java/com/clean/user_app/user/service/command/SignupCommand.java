@@ -6,9 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * description    : 로그인/회원가입 서비스용 커맨드 DTO
+ * description    : 회원가입 서비스용 커맨드 DTO
  * packageName    : com.clean.user_app.user.service.command
- * fileName       : SignupRequest
+ * fileName       : SignupCommand
  * author         : 김현주
  * date           : 25. 6. 14.
  * ===========================================================
