@@ -1,12 +1,14 @@
 package com.clean.user_app.common.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * description    : 인터셉터 등록 및 관리
+ * description    : 공통 빈 등록 등
  * packageName    : com.clean.user_app.common.security
  * fileName       : WebConfig
  * author         : 김현주
@@ -25,6 +27,12 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginCheckInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/**");
+//                .excludePathPatterns("/user/**");
+                .excludePathPatterns("/**");
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

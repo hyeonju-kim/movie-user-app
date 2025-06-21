@@ -1,6 +1,6 @@
-package com.clean.user_app.user.repository;
+package com.clean.user_app.domain.user.repository;
 
-import com.clean.user_app.entity.User;
+import com.clean.user_app.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

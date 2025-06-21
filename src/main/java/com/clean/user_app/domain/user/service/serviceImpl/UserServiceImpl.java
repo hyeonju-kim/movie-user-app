@@ -1,15 +1,16 @@
-package com.clean.user_app.user.service.serviceImpl;
+package com.clean.user_app.domain.user.service.serviceImpl;
 
-import com.clean.user_app.entity.User;
-import com.clean.user_app.user.repository.UserDao;
-import com.clean.user_app.user.repository.dto.SignupDto;
-import com.clean.user_app.user.service.UserService;
-import com.clean.user_app.user.service.command.LoginCommand;
-import com.clean.user_app.user.service.command.SignupCommand;
+import com.clean.user_app.domain.user.repository.UserDao;
+import com.clean.user_app.domain.user.repository.dto.SignupDto;
+import com.clean.user_app.domain.user.service.UserService;
+import com.clean.user_app.domain.user.service.command.LoginCommand;
+import com.clean.user_app.domain.user.service.command.SignupCommand;
+import com.clean.user_app.domain.user.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
     private final HttpServletRequest request;
     public static final String LOGIN_USER_KEY = "loginUser"; // 로그인 세션 키 상수
 
+    private final ApplicationEventPublisher publisher;
 
     // 회원 가입
     @Override

@@ -1,10 +1,10 @@
-package com.clean.user_app.user.repository.userDaoImpl;
+package com.clean.user_app.domain.user.repository.userDaoImpl;
 
-import com.clean.user_app.entity.User;
-import com.clean.user_app.user.repository.UserDao;
-import com.clean.user_app.user.repository.UserRepository;
-import com.clean.user_app.user.repository.dto.LoginDto;
-import com.clean.user_app.user.repository.dto.SignupDto;
+import com.clean.user_app.domain.user.repository.UserDao;
+import com.clean.user_app.domain.user.repository.UserRepository;
+import com.clean.user_app.domain.user.repository.dto.LoginDto;
+import com.clean.user_app.domain.user.entity.User;
+import com.clean.user_app.domain.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

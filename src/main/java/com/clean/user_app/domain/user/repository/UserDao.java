@@ -1,8 +1,8 @@
-package com.clean.user_app.user.repository;
+package com.clean.user_app.domain.user.repository;
 
-import com.clean.user_app.entity.User;
-import com.clean.user_app.user.repository.dto.LoginDto;
-import com.clean.user_app.user.repository.dto.SignupDto;
+import com.clean.user_app.domain.user.repository.dto.LoginDto;
+import com.clean.user_app.domain.user.entity.User;
+import com.clean.user_app.domain.user.repository.dto.SignupDto;
 import java.util.Optional;
 
 /**

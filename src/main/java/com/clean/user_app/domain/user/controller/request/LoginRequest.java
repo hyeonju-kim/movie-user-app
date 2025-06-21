@@ -1,6 +1,6 @@
-package com.clean.user_app.user.controller.request;
+package com.clean.user_app.domain.user.controller.request;
 
-import com.clean.user_app.user.service.command.LoginCommand;
+import com.clean.user_app.domain.user.service.command.LoginCommand;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;

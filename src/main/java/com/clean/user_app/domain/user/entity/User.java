@@ -1,4 +1,4 @@
-package com.clean.user_app.entity;
+package com.clean.user_app.domain.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

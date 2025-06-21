@@ -1,9 +1,9 @@
-package com.clean.user_app.user.controller;
+package com.clean.user_app.domain.user.controller;
 
 import com.clean.user_app.common.dto.CommonResponse;
-import com.clean.user_app.user.controller.request.LoginRequest;
-import com.clean.user_app.user.controller.request.SignupRequest;
-import com.clean.user_app.user.service.UserService;
+import com.clean.user_app.domain.user.controller.request.LoginRequest;
+import com.clean.user_app.domain.user.controller.request.SignupRequest;
+import com.clean.user_app.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -47,4 +47,5 @@ public class UserController {
     public String test() {
         return "test";
     }
+
 }

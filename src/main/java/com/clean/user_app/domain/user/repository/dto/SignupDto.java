@@ -1,6 +1,6 @@
-package com.clean.user_app.user.repository.dto;
+package com.clean.user_app.domain.user.repository.dto;
 
-import com.clean.user_app.entity.User;
+import com.clean.user_app.domain.user.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

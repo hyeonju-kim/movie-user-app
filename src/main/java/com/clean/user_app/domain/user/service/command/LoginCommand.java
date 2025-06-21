@@ -1,6 +1,6 @@
-package com.clean.user_app.user.service.command;
+package com.clean.user_app.domain.user.service.command;
 
-import com.clean.user_app.user.repository.dto.LoginDto;
+import com.clean.user_app.domain.user.repository.dto.LoginDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package com.clean.user_app.user.controller;
+package com.clean.user_app.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
