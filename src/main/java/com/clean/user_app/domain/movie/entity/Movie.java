@@ -1,13 +1,15 @@
 package com.clean.user_app.domain.movie.entity;
 
 import com.clean.user_app.domain.movie.service.command.MovieCommand;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.clean.user_app.domain.order.entity.Order;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * description    : 영화 Entity
@@ -40,6 +42,11 @@ public class Movie {
     private String showCnt;           // 상영 횟수
     private String price;             // 가격
     private String manufacturedBy;    // 생산 국가
+
+    // mappedBy는 외래키의 주도권이 상대방에 있음을 나타냄 -> "난 그냥 보여주기용이고, 진짜 저장·수정은 Order 쪽이 해~" 이런 뜻
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL) // movie는 Order 엔티티에 있는 movie 필드
+    @JsonIgnore // 단방향 출력으로 제어 (JSON 직렬화에서 제외하여 무한루프 방지)
+    private List<Order> orders = new ArrayList<>();
 
 
     public static Movie of(MovieCommand movieCommand) {
