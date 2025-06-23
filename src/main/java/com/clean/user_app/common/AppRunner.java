@@ -5,6 +5,7 @@ import com.clean.user_app.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,13 +23,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AppRunner implements ApplicationRunner {
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
+    // 기본 유저 생성
     @Override
     public void run(ApplicationArguments args) {
         User user = new User();
         user.setUsername("khj");
-        user.setPassword("1234");
+        String encodedPassword = bCryptPasswordEncoder.encode("1234");
+        user.setPassword(encodedPassword);
+
         userRepository.save(user);
     }
 }

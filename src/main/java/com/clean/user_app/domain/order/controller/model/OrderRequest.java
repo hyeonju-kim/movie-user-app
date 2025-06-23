@@ -1,8 +1,7 @@
 package com.clean.user_app.domain.order.controller.model;
 
-import com.clean.user_app.domain.movie.entity.Movie;
-import com.clean.user_app.domain.user.repository.dto.UserDto;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * description    : 영화 주문 요청 DTO
@@ -15,10 +14,10 @@ import lombok.Data;
  * -----------------------------------------------------------
  * 25. 6. 22.        김현주             최초 생성
  */
-@Data
+@Getter
+@Setter
 public class OrderRequest {
-    private UserDto userDto;
-    private Movie movie;
+    private Long movieId;
     private Long scheduleId;
     private String seatNumber;
 }

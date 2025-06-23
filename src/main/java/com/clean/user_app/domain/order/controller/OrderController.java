@@ -1,10 +1,14 @@
 package com.clean.user_app.domain.order.controller;
 
-import com.clean.user_app.domain.order.entity.Order;
+import com.clean.user_app.domain.order.controller.model.OrderRequest;
 import com.clean.user_app.domain.order.service.OrderService;
+import com.clean.user_app.domain.order.service.command.OrderCommand;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     private final OrderService orderService;
 
-    @GetMapping
-    public Order createOrder() {
-        final Order order = orderService.createOrder();
-        return order;
+    @PostMapping
+    public ResponseEntity<OrderCommand> regOrder(@RequestBody OrderRequest orderRequest, HttpSession session) {
+        final OrderCommand orderCommand = orderService.regOrder(orderRequest, session);
+
+        return ResponseEntity.ok(orderCommand);
     }
 }

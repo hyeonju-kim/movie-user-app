@@ -2,16 +2,16 @@ package com.clean.user_app.domain.order.service.serviceImpl;
 
 import com.clean.user_app.domain.movie.entity.Movie;
 import com.clean.user_app.domain.movie.repository.MovieRepository;
+import com.clean.user_app.domain.order.controller.model.OrderRequest;
 import com.clean.user_app.domain.order.entity.Order;
 import com.clean.user_app.domain.order.repository.OrderRepository;
 import com.clean.user_app.domain.order.service.OrderService;
+import com.clean.user_app.domain.order.service.command.OrderCommand;
 import com.clean.user_app.domain.user.entity.User;
-import com.clean.user_app.domain.user.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * description    : 영화 주문 서비스 구현체
@@ -30,25 +30,19 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final MovieRepository movieRepository;
-    private final UserRepository userRepository;
 
     @Override
-    public Order createOrder() {
-        // 유저
-        final User user = new User();
-        user.setUsername("khj2");
-        user.setPassword("1234");
-        userRepository.save(user);
+    public OrderCommand regOrder(OrderRequest orderRequest, HttpSession session) {
+        OrderCommand orderCommand = OrderCommand.of(orderRequest);
 
-        // 영화
-        Optional<Movie> movie = movieRepository.findById(1L);
+        User user = (User) session.getAttribute("loginUser"); // 세션에서 유저 꺼내기
+        Movie movie = movieRepository.findById(orderCommand.getMovieId())
+                .orElseThrow(() -> new IllegalArgumentException("영화 정보가 존재하지 않습니다.")); // 영화 조회
 
-        // 저장
-        final Order order = Order.create(user, movie.get(), 1234L, "b7");
-        log.info("[createOrder] > [order] === {}", order);
-
+        // 주문 생성
+        Order order = Order.create(user, movie, orderCommand.getScheduleId(), orderCommand.getSeatNumber());
         orderRepository.save(order);
 
-        return order;
+        return OrderCommand.of(order);
     }
 }

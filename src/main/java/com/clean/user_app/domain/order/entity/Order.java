@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * description    : 영화 주문 Entity
+ * description    : 영화 주문 Entity (Aggregate Root)
  * packageName    : com.clean.user_app.domain.purchase.entity
  * fileName       : Purchase
  * author         : 김현주
@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
  */
 @Entity
 @Table(name = "orders")
-@Getter @Builder @ToString
+@Getter
 @Slf4j
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 외부에서 기본 생성 못 하게 막기
 @AllArgsConstructor
