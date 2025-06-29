@@ -1,7 +1,8 @@
 package com.clean.user_app.domain.user.service;
 
-import com.clean.user_app.domain.user.service.command.LoginCommand;
-import com.clean.user_app.domain.user.service.command.SignupCommand;
+
+import com.nicole.user_app_common.domain.user.service.command.LoginCommand;
+import com.nicole.user_app_common.domain.user.service.command.SignupCommand;
 
 /**
  * description    : 유저 서비스 인터페이스

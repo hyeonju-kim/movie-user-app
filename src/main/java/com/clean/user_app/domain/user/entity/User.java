@@ -1,6 +1,5 @@
 package com.clean.user_app.domain.user.entity;
 
-import com.clean.user_app.domain.order.entity.Order;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -30,7 +29,7 @@ public class User {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // user는 Order 엔티티에 있는 user 필드
-    @JsonIgnore // 단방향 출력으로 제어 (JSON 직렬화에서 제외하여 무한루프 방지)
-    private List<Order> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // user는 Order 엔티티에 있는 user 필드
+//    @JsonIgnore // 단방향 출력으로 제어 (JSON 직렬화에서 제외하여 무한루프 방지)
+//    private List<Order> orders = new ArrayList<>();
 }

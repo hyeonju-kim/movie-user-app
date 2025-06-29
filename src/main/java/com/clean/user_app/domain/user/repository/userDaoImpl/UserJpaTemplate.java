@@ -2,9 +2,9 @@ package com.clean.user_app.domain.user.repository.userDaoImpl;
 
 import com.clean.user_app.domain.user.repository.UserDao;
 import com.clean.user_app.domain.user.repository.UserRepository;
-import com.clean.user_app.domain.user.repository.dto.LoginDto;
 import com.clean.user_app.domain.user.entity.User;
-import com.clean.user_app.domain.user.repository.dto.SignupDto;
+import com.nicole.user_app_common.domain.user.repository.dto.LoginDto;
+import com.nicole.user_app_common.domain.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -29,7 +29,10 @@ public class UserJpaTemplate implements UserDao {
 
     @Override
     public void regUser(SignupDto signupDto) {
-        userRepository.save(signupDto.toEntity());
+        User user = new User();
+        user.setUsername(signupDto.getUsername());
+        user.setPassword(signupDto.getPassword());
+        userRepository.save(user);
     }
 
     @Override

@@ -1,11 +1,11 @@
 package com.clean.user_app.domain.user.service.serviceImpl;
 
 import com.clean.user_app.domain.user.repository.UserDao;
-import com.clean.user_app.domain.user.repository.dto.SignupDto;
 import com.clean.user_app.domain.user.service.UserService;
-import com.clean.user_app.domain.user.service.command.LoginCommand;
-import com.clean.user_app.domain.user.service.command.SignupCommand;
 import com.clean.user_app.domain.user.entity.User;
+import com.nicole.user_app_common.domain.user.repository.dto.SignupDto;
+import com.nicole.user_app_common.domain.user.service.command.LoginCommand;
+import com.nicole.user_app_common.domain.user.service.command.SignupCommand;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

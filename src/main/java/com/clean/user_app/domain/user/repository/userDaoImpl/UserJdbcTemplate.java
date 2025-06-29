@@ -1,9 +1,9 @@
 package com.clean.user_app.domain.user.repository.userDaoImpl;
 
 import com.clean.user_app.domain.user.repository.UserDao;
-import com.clean.user_app.domain.user.repository.dto.LoginDto;
-import com.clean.user_app.domain.user.repository.dto.SignupDto;
 import com.clean.user_app.domain.user.entity.User;
+import com.nicole.user_app_common.domain.user.repository.dto.LoginDto;
+import com.nicole.user_app_common.domain.user.repository.dto.SignupDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
